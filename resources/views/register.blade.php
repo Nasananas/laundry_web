@@ -17,44 +17,88 @@
   <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
     <form class="space-y-6" action="{{ route('account.processRegister') }}" method="POST">
       @csrf
+
+      <!-- Username -->
       <div>
         <label for="name" class="block text-sm font-medium leading-6 text-gray-900">Username</label>
         <div class="mt-2">
-          <input id="name" name="name" type="text" autocomplete="name" @error('name') is-invalid @enderror value="{{ old('name') }}" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+          <input id="name" name="name" type="text" autocomplete="name" @error('name') is-invalid @enderror value="{{ old('name') }}" 
+                 class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 
+                        focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
         </div>
         @error('name')
             <p class="invalid-feedback text-red-500 text-sm mt-1">{{ $message }}</p>
         @enderror
       </div>
+
+      <!-- Email -->
       <div>
         <label for="email" class="block text-sm font-medium leading-6 text-gray-900">Email address</label>
         <div class="mt-2">
-          <input id="email" name="email" type="text" autocomplete="email" @error('email') is-invalid @enderror value="{{ old('email') }}" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+          <input id="email" name="email" type="text" autocomplete="email" @error('email') is-invalid @enderror value="{{ old('email') }}" 
+                 class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 
+                        focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
         </div>
         @error('email')
             <p class="invalid-feedback text-red-500 text-sm mt-1">{{ $message }}</p>
         @enderror
       </div>
 
+      <!-- Password -->
       <div>
         <label for="password" class="block text-sm font-medium leading-6 text-gray-900">Password</label>
         <div class="mt-2">
-          <input id="password" name="password" type="password" autocomplete="new-password" @error('password') is-invalid @enderror class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+          <input id="password" name="password" type="password" autocomplete="new-password" @error('password') is-invalid @enderror 
+                 class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 
+                        focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
         </div>
         @error('password')
           <p class="invalid-feedback text-red-500 text-sm mt-1">{{ $message }}</p>
         @enderror
       </div>
 
+      <!-- Konfirmasi Password -->
       <div>
         <label for="password_confirmation" class="block text-sm font-medium leading-6 text-gray-900">Konfirmasi Password</label>
         <div class="mt-2">
-          <input id="password_confirmation" name="password_confirmation" type="password" autocomplete="new-password" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+          <input id="password_confirmation" name="password_confirmation" type="password" autocomplete="new-password" 
+                 class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 
+                        focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
         </div>
       </div>
 
+      <!-- Nomor Telepon -->
       <div>
-        <button type="submit" class="flex w-full justify-center rounded-md bg-gradient-to-br from-indigo-600 to-purple-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-[#1D9FC3] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Registrasi</button>
+        <label for="no_tlpn" class="block text-sm font-medium leading-6 text-gray-900">Nomor Telepon</label>
+        <div class="mt-2">
+          <input id="no_tlpn" name="no_tlpn" type="text" autocomplete="tel" @error('no_tlpn') is-invalid @enderror value="{{ old('no_tlpn') }}" 
+                 class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 
+                        focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" placeholder="Contoh: 08123456789">
+        </div>
+        @error('no_tlpn')
+          <p class="invalid-feedback text-red-500 text-sm mt-1">{{ $message }}</p>
+        @enderror
+      </div>
+
+      <!-- Alamat -->
+      <div>
+        <label for="alamat" class="block text-sm font-medium leading-6 text-gray-900">Alamat</label>
+        <div class="mt-2">
+          <textarea id="alamat" name="alamat" rows="3" autocomplete="street-address" 
+                    class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 
+                           focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" placeholder="Masukkan alamat lengkap">{{ old('alamat') }}</textarea>
+        </div>
+        @error('alamat')
+          <p class="invalid-feedback text-red-500 text-sm mt-1">{{ $message }}</p>
+        @enderror
+      </div>
+
+      <!-- Submit -->
+      <div>
+        <button type="submit" 
+                class="flex w-full justify-center rounded-md bg-gradient-to-br from-indigo-600 to-purple-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-[#1D9FC3] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
+          Registrasi
+        </button>
       </div>
     </form>
 

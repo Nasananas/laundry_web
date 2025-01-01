@@ -6,10 +6,28 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Sign In</title>
     @vite('resources/css/app.css') <!-- Sesuaikan sesuai proyek -->
+    <style>
+        /* Tambahan custom CSS untuk background */
+        .background-image {
+            background-image: url('/img/bg-login.png'); /* Path gambar di direktori public */
+            background-size: cover; /* Gambar memenuhi layar */
+            background-position: center; /* Posisi gambar di tengah */
+            min-height: 100vh; /* Tinggi penuh layar */
+            width: 100%; /* Lebar penuh */
+        }
+    </style>
 </head>
-<body class="h-full">
+<body class="h-full background-image flex items-center justify-center">
 
-<div class="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
+<!-- Wrapper untuk Lapisan Putih -->
+<div class="bg-white/90 shadow-lg rounded-xl p-8 sm:p-10 w-full max-w-md">
+  <!-- Judul Halaman -->
+  <div class="text-center mb-6">
+    <h2 class="text-2xl font-bold leading-9 tracking-tight text-[#344C64]">
+      Silakan Login ke OLIVIA
+    </h2>
+  </div>
+
   <!-- Notifikasi Success -->
   @if (Session::has('success'))
   <div class="alert flex p-4 mb-6 bg-green-100 rounded-lg" role="alert">
@@ -34,51 +52,41 @@
   </div>
   @endif
 
-  <div class="sm:mx-auto sm:w-full sm:max-w-sm">
-    <h2 class="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-[#344C64]">Silakan Login ke OLIVIA</h2>
-  </div>
-
-  <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-    <form class="space-y-6" action="{{ route('account.authenticate') }}" method="POST">
-      @csrf
-      <div>
-        <label for="email" class="block text-sm font-medium leading-6 text-gray-900">Email address</label>
-        <div class="mt-2">
-          <input id="email" name="email" type="text" autocomplete="email" @error('email') is-invalid @enderror value="{{ old('email') }}" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
-        </div>
-        @error('email')
-            <p class="invalid-feedback text-red-500 text-sm mt-1">{{ $message }}</p>
-        @enderror
+  <!-- Form Login -->
+  <form class="space-y-6" action="{{ route('account.authenticate') }}" method="POST">
+    @csrf
+    <!-- Input Email -->
+    <div>
+      <label for="email" class="block text-sm font-medium leading-6 text-gray-900">Email address</label>
+      <div class="mt-2">
+        <input id="email" name="email" type="text" autocomplete="email" 
+        class="block w-full rounded-md border border-gray-300 py-2 px-3 text-gray-900 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
       </div>
+    </div>
 
-      <div>
-        <div class="flex items-center justify-between">
-          <label for="password" class="block text-sm font-medium leading-6 text-gray-900">Password</label>
-          <div class="text-sm">
-            <a href="#" class="font-semibold text-indigo-600 hover:text-indigo-600">Lupa password?</a>
-          </div>
-        </div>
-        <div class="mt-2">
-          <input id="password" name="password" type="password" autocomplete="current-password" @error('password') is-invalid @enderror class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
-        </div>
-        @error('password')
-          <p class="invalid-feedback text-red-500 text-sm mt-1">{{ $message }}</p>
-        @enderror
+    <!-- Input Password -->
+    <div>
+      <label for="password" class="block text-sm font-medium leading-6 text-gray-900">Password</label>
+      <div class="mt-2">
+        <input id="password" name="password" type="password" autocomplete="current-password" 
+        class="block w-full rounded-md border border-gray-300 py-2 px-3 text-gray-900 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
       </div>
+    </div>
 
-      <div>
-        <button type="submit" class="flex w-full justify-center rounded-md bg-gradient-to-br from-indigo-600 to-purple-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-gradient-to-br hover:from-indigo-700 hover:to-purple-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
-          Login
-        </button>
-      </div>
-      
-    </form>
+    <!-- Tombol Submit -->
+    <div>
+      <button type="submit" 
+        class="w-full flex justify-center rounded-md bg-gradient-to-br from-indigo-600 to-purple-600 px-4 py-2 text-sm font-semibold leading-6 text-white shadow-sm hover:from-indigo-700 hover:to-purple-700 focus:outline-none focus:ring-2 focus:ring-indigo-600">
+        Login
+      </button>
+    </div>
+  </form>
 
-    <p class="mt-10 text-center text-sm text-gray-500">
-      Bukan member?
-      <a href="{{ route('account.register') }}" class="font-semibold leading-6 text-indigo-600 hover:text-indigo-600">Registrasi</a>
-    </p>
-  </div>
+  <!-- Link Registrasi -->
+  <p class="mt-6 text-center text-sm text-gray-500">
+    Bukan member?
+    <a href="{{ route('account.register') }}" class="font-semibold text-indigo-600 hover:text-indigo-700">Registrasi</a>
+  </p>
 </div>
 
 </body>

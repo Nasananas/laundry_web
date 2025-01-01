@@ -15,10 +15,10 @@
             Kami menggunakan teknologi moderen dan bahan terbaik untuk memastikan pakaian Anda terawat dengan sempurna
           </p>
           <div class="mt-6 flex gap-4">
-            <a href="#" class="bg-blue-500 hover:bg-blue-700 text-white py-3 px-6 rounded-lg shadow-md">
+            <a href="{{ route('account.login') }}" class="bg-purple-500 hover:bg-purple-700 text-white py-3 px-6 rounded-lg shadow-md">
               Pesan Sekarang
             </a>
-            <a href="#" class="text-blue-100 hover:underline border border-white py-3 px-6 rounded-lg">
+            <a href="{{ route('account.login') }}" class="text-blue-100 hover:underline border border-white py-3 px-6 rounded-lg">
               Temukan lebih banyak
             </a>
           </div>
@@ -26,7 +26,7 @@
   
         <!-- Right Side - Image -->
         <div class="flex justify-center lg:justify-end">
-          <img src="img/img1.png" alt="Hero Image" class="rounded-lg max-w-full h-auto">
+          <img src="img/img2.png" alt="Hero Image" class="rounded-lg max-w-full h-auto">
         </div>
       </div>
     </div>

@@ -23,11 +23,6 @@
                         <label for="jenis" class="block text-sm font-semibold text-gray-700">Jenis layanan</label>
                         <input type="text" name="jenis" id="jenis" class="mt-1 block w-full p-3 border border-gray-300 rounded-md" value="{{ old('jenis') }}" placeholder="Misal:satuan,kiloan, dll" required>
                     </div>
-
-                    <div>
-                        <label for="gambar" class="block text-sm font-semibold text-gray-700">Gambar Produk</label>
-                        <input type="file" name="gambar" id="gambar" class="mt-1 block w-full p-3 border border-gray-300 rounded-md">
-                    </div>
                 </div>
 
                 <div class="mt-6">

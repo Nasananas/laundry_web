@@ -22,6 +22,12 @@ use App\Http\Controllers\Pelanggan\ProfileController;
 use App\Http\Controllers\DurasiController;
 use App\Http\Controllers\PewangiController;
 use App\Http\Controllers\TransportController;
+use App\Http\Controllers\PiutangController;
+use App\Http\Controllers\HutangController;
+use App\Http\Controllers\TransaksiController;
+use App\Http\Controllers\LaporanController;
+use App\Http\Controllers\HistoryPesananController;
+
 
 
 Route::get('/', function () {
@@ -63,9 +69,15 @@ Route::group(['prefix' => 'account'],function(){
         //PEMESANAN
         Route::get('layanan', [LayananController::class, 'index'])->name('account.layanan');
         Route::get('/pesanan/{produkId}/create', [PesananController::class, 'create'])->name('account.pesanan.aturpesanan');
-        Route::post('pesanan', [PesananController::class, 'store'])->name('account.pesanan.store');
-        Route::get('pesanan', [PesananController::class, 'index'])->name('account.pesanan'); 
-
+        Route::post('/account/pesanan/store', [PesananController::class, 'store'])->name('account.pesanan.store');
+        Route::get('/pesanan/store', [PesananController::class, 'index'])->name('account.pesanan');
+        Route::get('/pesanan/{id}/invoice', [PesananController::class, 'invoice'])->name('account.pesanan.invoice');
+        Route::post('pesanan/delete/{id}', [PesananController::class, 'delete'])->name('account.pesanan.delete');
+        Route::get('pesanan/success/{pesanan}', [PesananController::class, 'success'])->name('account.success');
+        //BELUM BAYAR
+        Route::get('/hutang', [HutangController::class, 'index'])->name('account.hutang');
+        //HISTORY PESANAN
+        Route::get('/account/history', [HistoryPesananController::class, 'index'])->name('account.history');
     
 
     });
@@ -95,8 +107,15 @@ Route::group(['prefix' => 'admin'],function(){
         Route::get('booking/edit/{id}', [BookingController::class, 'edit'])->name('admin.booking.edit');
         Route::post('booking/update/{id}', [BookingController::class, 'update'])->name('admin.booking.update');
         Route::post('booking/delete/{id}', [BookingController::class, 'delete'])->name('admin.booking.delete');
+        Route::put('/admin/booking/updateStatus/{id}', [BookingController::class, 'updateStatus'])->name('admin.booking.updateStatus');
         // invoice
         Route::get('/booking/{id}/invoice', [BookingController::class, 'invoice'])->name('admin.booking.invoice');
+        //TRANSAKSI
+        Route::get('/transaksi', [TransaksiController::class, 'index'])->name('admin.transaksi.index');
+        //LAPORAN
+        Route::get('/admin/laporan', [LaporanController::class, 'index'])->name('admin.laporan.index');
+
+
         //DISKON
         // Route di file web.php
         Route::get('discount', [DiscountController::class, 'index'])->name('admin.discount');
@@ -149,10 +168,9 @@ Route::group(['prefix' => 'admin'],function(){
         Route::post('transport/store', [TransportController::class, 'store'])->name('admin.transport.store');
         Route::get('transport/{id}/edit', [TransportController::class, 'edit'])->name('admin.transport.edit');
         Route::put('transport/{id}/update', [TransportController::class, 'update'])->name('admin.transport.update');
-        Route::delete('transport/{id}/delete', [TransportController::class, 'destroy'])->name('admin.transport.delete');  
+        Route::delete('transport/{id}/delete', [TransportController::class, 'destroy'])->name('admin.transport.delete');
+        //PIUTANG
+        Route::get('/admin/piutang', [PiutangController::class, 'index'])->name('admin.piutang');
 
     });
 });
-
-
-Route::get('/adminpesanan', [AdminPesananController::class, 'index']);

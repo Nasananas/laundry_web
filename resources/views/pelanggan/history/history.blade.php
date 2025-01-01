@@ -1,11 +1,11 @@
-<x-layout2>
-    @section('title', 'Pesanan Laundry')
+<x-layout3>
+    @section('title', 'History Pesanan')
 
     @section('content')
-        <h3 class="text-lg leading-6 font-medium text-gray-900 mb-4">Pesanan Laundry</h3>
+        <h3 class="text-lg leading-6 font-medium text-gray-900 mb-4">History Pesanan Laundry</h3>
 
         <!-- Form Filter Tanggal -->
-        <form action="{{ route('admin.booking') }}" method="GET" class="mb-4">
+        <form action="{{ route('account.history') }}" method="GET" class="mb-4">
             <div class="flex items-center space-x-4">
                 <div>
                     <label for="filter_date" class="block text-sm font-medium text-gray-700">Filter Tanggal</label>
@@ -20,7 +20,7 @@
                 </div>
                 <!-- Refresh Button -->
                 <div class="mt-5">
-                    <a href="{{ route('admin.booking') }}" class="inline-flex items-center px-4 py-2 text-[#556bce] hover:text-[#d5ddff] focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2">
+                    <a href="{{ route('account.history') }}" class="inline-flex items-center px-4 py-2 text-[#556bce] hover:text-[#d5ddff] focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2">
                         <!-- SVG Icon for Refresh -->
                         <svg class="w-6 h-6 text-[#556bce]" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
                             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.651 7.65a7.131 7.131 0 0 0-12.68 3.15M18.001 4v4h-4m-7.652 8.35a7.13 7.13 0 0 0 12.68-3.15M6 20v-4h4"/>
@@ -41,7 +41,6 @@
                         <th class="py-3 px-4 text-left text-gray-600">Total Harga</th>
                         <th class="py-3 px-4 text-left text-gray-600">Status Pembayaran</th>
                         <th class="py-3 px-4 text-left text-gray-600">Status Pesanan</th>
-                        <th class="py-3 px-4 text-left text-gray-600">Aksi</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -60,36 +59,20 @@
                                 </span>
                             </td>
                             <td class="py-3 px-4 text-gray-700">
-                                <form action="{{ route('admin.booking.updateStatus', $item->id) }}" method="POST" class="inline-block">
-                                    @csrf
-                                    @method('PUT')
-                                    <button type="submit" class="text-sm font-medium text-white rounded-full 
-                                        {{ $item->status_pesanan === 'Pending' ? 'bg-yellow-500' : 
-                                        ($item->status_pesanan === 'Proses' ? 'bg-blue-500' : 
-                                        ($item->status_pesanan === 'Selesai' ? 'bg-green-500' : 'bg-gray-500')) }} 
-                                        hover:bg-opacity-75 px-2 py-1 w-auto">
-                                        {{ ucfirst($item->status_pesanan) }}
-                                    </button>
-                                </form>
-                            </td>                            
-                            <td class="py-3 px-4 flex space-x-2">
-                                <a href="{{ route('admin.booking.edit', $item->id) }}" 
-                                   class="inline-block px-4 py-2 text-xs font-medium text-white bg-blue-500 hover:bg-blue-600 rounded-md">
-                                    Edit
-                                </a>
-                                <a href="{{ route('admin.booking.invoice', $item->id) }}" 
-                                   class="inline-block px-4 py-2 text-xs font-medium text-white bg-yellow-500 hover:bg-yellow-600 rounded-md">
-                                    Invoice
-                                </a>
+                                <span 
+                                    class="inline-block px-3 py-1 text-xs font-medium text-white rounded-full 
+                                    {{ $item->status_pesanan === 'Selesai' ? 'bg-green-500' : 'bg-gray-500' }}">
+                                    {{ ucfirst($item->status_pesanan) }}
+                                </span>
                             </td>
                         </tr>
                     @empty
                         <tr>
-                            <td colspan="8" class="py-3 px-4 text-gray-700 text-center">Belum ada pesanan.</td>
+                            <td colspan="7" class="py-3 px-4 text-gray-700 text-center">Belum ada history pesanan.</td>
                         </tr>
                     @endforelse
                 </tbody>
             </table>
         </div>
     @endsection
-</x-layout2>
+</x-layout3>

@@ -7,7 +7,7 @@
     @vite('resources/css/app.css')
     <link rel="stylesheet" href="https://rsms.me/inter/inter.css">
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
-    <title>OLIVOA Laundry</title>
+    <title>OLIVIA Laundry</title>
 </head>
 
 <body class="h-full">
@@ -30,38 +30,38 @@
       
       <x-contact></x-contact>
 
-      <footer class="bg-gray-800">
+      <footer class="bg-gradient-to-br from-indigo-600 to-purple-600">
         <div class="max-w-7xl mx-auto py-12 px-4 overflow-hidden sm:px-6 lg:px-8">
           <nav class="flex flex-wrap justify-center" aria-label="Footer">
             <div class="px-5 py-2">
-              <a href="#" class="text-base text-gray-400 hover:text-gray-300">About</a>
+              <a href="#" class="text-base text-gray-100 hover:text-gray-200">About</a>
             </div>
             <div class="px-5 py-2">
-              <a href="#" class="text-base text-gray-400 hover:text-gray-300">Shop</a>
+              <a href="#" class="text-base text-gray-100 hover:text-gray-200">Shop</a>
             </div>
             <div class="px-5 py-2">
-              <a href="#" class="text-base text-gray-400 hover:text-gray-300">Privacy Policy</a>
+              <a href="#" class="text-base text-gray-100 hover:text-gray-200">Privacy Policy</a>
             </div>
             <div class="px-5 py-2">
-              <a href="#" class="text-base text-gray-400 hover:text-gray-300">Contact</a>
+              <a href="#" class="text-base text-gray-100 hover:text-gray-200">Contact</a>
             </div>
           </nav>
           <div class="mt-8 flex justify-center space-x-6">
-            <a href="#" class="text-gray-400 hover:text-gray-300">
+            <a href="#" class="text-gray-100 hover:text-gray-200">
               <span class="sr-only">Facebook</span>
               <!-- Facebook Icon -->
               <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                 <path d="M22 12.1c0-5.5-4.4-10-9.9-10C6.5 2.1 2 6.5 2 12.1 2 17 5.8 21.3 10.5 22v-6.5H8v-2.6h2.5v-1.9c0-2.5 1.5-3.8 3.7-3.8 1 0 2 .1 2.2.1v2.5h-1.6c-1.3 0-1.7.7-1.7 1.6v1.6H18l-.5 2.6h-2.5V22C18.2 21.3 22 17 22 12.1z"/>
               </svg>
             </a>
-            <a href="#" class="text-gray-400 hover:text-gray-300">
+            <a href="#" class="text-gray-100 hover:text-gray-200">
               <span class="sr-only">Twitter</span>
               <!-- Twitter Icon -->
               <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                 <path d="M23.5 5.7c-.9.4-1.8.6-2.7.8a4.7 4.7 0 0 0 2-2.6 9.6 9.6 0 0 1-3 1.1 4.7 4.7 0 0 0-8.1 4.3 13.4 13.4 0 0 1-9.7-5 4.7 4.7 0 0 0 1.4 6.3 4.8 4.8 0 0 1-2.1-.6v.1c0 2.3 1.6 4.2 3.7 4.6a4.8 4.8 0 0 1-2.1.1 4.7 4.7 0 0 0 4.4 3.3 9.5 9.5 0 0 1-5.8 2A9.7 9.7 0 0 0 9.5 21c6.2 0 9.7-5.2 9.7-9.7v-.4c.6-.5 1.3-1.2 1.8-1.9z"/>
               </svg>
             </a>
-            <a href="#" class="text-gray-400 hover:text-gray-300">
+            <a href="#" class="text-gray-100 hover:text-gray-200">
               <span class="sr-only">Instagram</span>
               <!-- Instagram Icon -->
               <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
@@ -69,10 +69,9 @@
               </svg>
             </a>
           </div>
-          <p class="mt-8 text-center text-base text-gray-400">&copy; 2024 Your Company, Inc. All rights reserved.</p>
+          <p class="mt-8 text-center text-base text-gray-100">&copy; 2024 Your Company, Inc. All rights reserved.</p>
         </div>
-      </footer>
-      
+      </footer>      
 
     </main>
   </div>

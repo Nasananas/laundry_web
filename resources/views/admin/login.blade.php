@@ -4,10 +4,25 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Sign In</title>
-    @vite('resources/css/app.css') <!-- Sesuaikan sesuai proyek -->
+    <title>Admin Login</title>
+    @vite('resources/css/app.css') <!-- Sesuaikan path proyek Tailwind CSS -->
+    <style>
+      .background-image {
+          background-image: url('/img/bg-login.png'); /* Ganti dengan path gambar sesuai */
+          background-size: cover;
+          background-position: center;
+          min-height: 100vh;
+          width: 100%;
+      }
+      .form-container {
+          background-color: rgba(255, 255, 255, 0.9); /* Lapisan putih transparan */
+          padding: 2rem;
+          border-radius: 8px;
+          box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Shadow halus */
+      }
+    </style>
 </head>
-<body class="h-full">
+<body class="h-full background-image flex items-center justify-center">
 
 <div class="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
   <!-- Notifikasi Success -->
@@ -34,20 +49,21 @@
   </div>
   @endif
 
-  <div class="sm:mx-auto sm:w-full sm:max-w-sm">
-    <h2 class="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-[#344C64]">Silakan Login Administrator!</h2>
-  </div>
+  <div class="bg-white/90 shadow-lg rounded-xl p-8 sm:p-10 w-full max-w-md">
+    <h2 class="text-center text-2xl font-bold leading-9 tracking-tight text-[#344C64]">
+      Silakan Login Administrator
+    </h2>
 
-  <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-    <form class="space-y-6" action="{{ route('admin.authenticate') }}" method="POST">
+    <form class="space-y-6 mt-6" action="{{ route('admin.authenticate') }}" method="POST">
       @csrf
       <div>
         <label for="email" class="block text-sm font-medium leading-6 text-gray-900">Email address</label>
         <div class="mt-2">
-          <input id="email" name="email" type="text" autocomplete="email" @error('email') is-invalid @enderror value="{{ old('email') }}" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+          <input id="email" name="email" type="text" autocomplete="email" @error('email') is-invalid @enderror value="{{ old('email') }}" 
+                 class="block w-full rounded-md border border-gray-300 py-2 px-3 text-gray-900 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
         </div>
         @error('email')
-            <p class="invalid-feedback text-red-500 text-sm mt-1">{{ $message }}</p>
+          <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
         @enderror
       </div>
 
@@ -55,19 +71,23 @@
         <div class="flex items-center justify-between">
           <label for="password" class="block text-sm font-medium leading-6 text-gray-900">Password</label>
           <div class="text-sm">
-            <a href="#" class="font-semibold text-indigo-600 hover:text-indigo-600">Forgot password?</a>
+            <a href="#" class="font-semibold text-indigo-600 hover:text-indigo-500">Forgot password?</a>
           </div>
         </div>
         <div class="mt-2">
-          <input id="password" name="password" type="password" autocomplete="current-password" @error('password') is-invalid @enderror class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+          <input id="password" name="password" type="password" autocomplete="current-password" @error('password') is-invalid @enderror 
+                 class="block w-full rounded-md border border-gray-300 py-2 px-3 text-gray-900 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
         </div>
         @error('password')
-          <p class="invalid-feedback text-red-500 text-sm mt-1">{{ $message }}</p>
+          <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
         @enderror
       </div>
 
       <div>
-        <button type="submit" class="flex w-full justify-center rounded-md bg-gradient-to-br from-indigo-600 to-purple-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-[#1D9FC3] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Sign in</button>
+        <button type="submit" 
+                class="flex w-full justify-center rounded-md bg-gradient-to-br from-indigo-600 to-purple-600 px-4 py-2 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-gradient-to-br hover:from-indigo-700 hover:to-purple-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
+          Login
+        </button>
       </div>
     </form>
   </div>

@@ -9,7 +9,8 @@
          /* CSS untuk konten utama */
          .content {
              margin-left: 16rem;
-             padding: 2rem; 
+             padding: 2rem;
+             margin-top: 3rem;
          }
      </style>
       @vite('resources/css/app.css')
@@ -25,7 +26,7 @@
 
          <div class="flex-1 bg-gray-100 p-6">
             <!-- Header -->
-            <x-header3 />
+            <x-navbar3 />
 
             <!-- Main Content -->
             <div class="bg-white shadow-lg rounded-lg content p-6">

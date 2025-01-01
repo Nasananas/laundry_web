@@ -8,10 +8,6 @@
         <div class="space-y-4">
             @foreach ($produk as $item)
                 <div class="flex items-center bg-white shadow-md rounded-lg p-4">
-                    <!-- Gambar Produk -->
-                    <div class="w-16 h-16 flex-shrink-0">
-                        <img src="{{ asset('storage/' . $item->gambar) }}" alt="{{ $item->nama }}" class="w-full h-full object-cover rounded-md">
-                    </div>
 
                     <!-- Deskripsi Produk -->
                     <div class="flex-1 ml-4">

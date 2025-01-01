@@ -1,5 +1,5 @@
 <x-layout3>
-    @section('title', 'Checkout')
+    @section('title', 'Pesanan')
 
     @section('content')
     <div class="container mx-auto p-8 bg-white shadow-lg rounded-lg">
@@ -8,16 +8,20 @@
         <!-- Menampilkan Data Pengguna yang Login -->
         <div class="p-4 mb-6 bg-gray-200 border rounded-lg">
             <p class="text-lg font-medium text-gray-800">Alamat</p>
-            <p class="text-gray-700">Nama Pengguna: <span class="font-semibold">{{ $user->name }}</span></p>
+            <p class="text-gray-700">Nama Pengguna: <span class="font-semibold">{{ Auth::user()->name }}</span></p>
         </div>
+        
         <!-- Menampilkan Produk yang Dipilih -->
-        <div class="p-4 mb-6 bg-gray-200 border rounded-lg">
-            <p class="text-lg font-medium text-gray-800">Produk yang Dipilih:</p>
-            <p class="text-gray-700">Nama Produk: <span class="font-semibold">{{ $produk->nama }}</span></p>
-            <p class="text-gray-700">Harga: <span class="font-semibold">Rp{{ number_format($produk->harga, 0, ',', '.') }}</span></p>
+        <div class="flex items-center bg-white shadow-md rounded-lg p-4">
+            <div class="flex-1 ml-4">
+                <p class="text-lg font-medium text-gray-800">Produk yang Dipilih:</p>
+                <p class="text-gray-700">Nama Produk: <span class="font-semibold">{{ $produk->nama }}</span></p>
+                <p class="text-gray-700">Harga: <span class="font-semibold">Rp{{ number_format($produk->harga, 0, ',', '.') }}</span></p>
+                <p class="text-gray-700">Layanan: <span class="font-semibold">{{ $produk->jenis }}</span></p>
+            </div>
         </div>
 
-        <form action="{{ route('account.pesanan.store') }}" method="POST" class="space-y-6">
+        <form action="{{ route('account.pesanan.store') }}" method="POST" class="space-y-6" id="pesananForm">
             @csrf
             <input type="hidden" name="produk_id" value="{{ $produk->id }}">
             <input type="hidden" id="produkHarga" value="{{ $produk->harga }}">
@@ -27,9 +31,7 @@
                 <select name="durasi" id="durasi" class="bg-gray-50 border border-gray-300 text-gray-900 text-base rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block w-full p-3">
                     <option class="text-gray-400" disabled selected>Pilih</option>
                     @foreach ($durasi as $item)
-                        <option value="{{ $item->id }}">
-                            {{ $item->nama }}
-                        </option>
+                        <option value="{{ $item->id }}">{{ $item->nama }}</option>
                     @endforeach
                 </select>
             </div>
@@ -39,9 +41,7 @@
                 <select name="parfum" id="parfum" class="bg-gray-50 border border-gray-300 text-gray-900 text-base rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block w-full p-3">
                     <option class="text-gray-400" disabled selected>Pilih</option>
                     @foreach ($pewangi as $item)
-                        <option value="{{ $item->id }}">
-                            {{ $item->parfum }}
-                        </option>
+                        <option value="{{ $item->id }}">{{ $item->parfum }}</option>
                     @endforeach
                 </select>
             </div>
@@ -58,54 +58,56 @@
                 </select>
             </div>
 
-            {{-- <div class="space-y-2">
-                <label for="metode_pembayaran" class="block text-gray-700 font-medium">Metode Pembayaran</label>
-                <div class="flex space-x-4">
-                    <!-- Tombol Tunai -->
-                    <button type="button" class="btn-pembayaran py-2 px-4 border-2 border-gray-300 rounded-lg text-gray-600 font-medium hover:border-purple-500 hover:text-purple-500 transition"
-                        onclick="selectPayment(this)">
-                        Tunai
-                    </button>
-                </div>
-                <!-- Input hidden untuk menyimpan metode pembayaran yang dipilih -->
-                <input type="hidden" name="metode_pembayaran" id="metode_pembayaran">
-            </div>             --}}
+            <div class="flex items-center mt-4">
+                <button type="button" class="bg-gray-300 text-gray-800 px-3 py-1 rounded-l" onclick="decreaseQuantity()">-</button>
+                <input type="number" id="jumlahPesanan" name="jumlah_pesanan" value="1" min="1" class="w-16 text-center border-t border-b border-gray-300" readonly>
+                <button type="button" class="bg-gray-300 text-gray-800 px-3 py-1 rounded-r" onclick="increaseQuantity()">+</button>
+            </div>
 
             <div class="p-4 bg-[#e9eefe] rounded-lg">
                 <p class="text-gray-700 font-semibold">Rincian Transaksi:</p>
-                
-                <!-- Total Layanan -->
                 <p class="text-gray-600">Total Layanan: <span id="hargaProduk">Rp{{ number_format($produk->harga, 0, ',', '.') }}</span></p>
-                
-                <!-- Antar-Jemput, jika dipilih -->
-                <p class="text-gray-600">Antar-Jemput: <span id="hargaAntarJemput" class="font-medium text-gray-400">Tidak</span></p>
-            
-                <!-- Total Bayar dengan Potongan Transport -->
-                <p class="text-lg text-gray-800 font-semibold mt-2">Total Bayar: 
-                    <span id="totalBayar" class="text-[#5971d0] font-bold">
-                        Rp{{ number_format($produk->harga, 0, ',', '.') }}
-                    </span>
-                </p>
+                <p class="text-gray-600">Ongkos Antar-Jemput: <span id="hargaTransport">Rp0</span></p>
+                <p class="text-lg font-semibold text-gray-900">Total Pembayaran: <span id="totalPembayaran">Rp{{ number_format($produk->harga, 0, ',', '.') }}</span></p>
             </div>
-            
-            <div class="mb-4 flex justify-end">
-                <button type="submit" class="bg-[#657FF3] text-white font-semibold py-2 px-4 rounded transition duration-300">
-                    Buat Pesanan
-                </button>
+
+            <div class="text-center">
+                <button type="submit" class="w-full bg-blue-600 text-white py-3 rounded-lg mt-4">Buat Pesanan</button>
             </div>
         </form>
     </div>
 
     <script>
+        // Update total price function
         function updateTotal() {
-            const produkHarga = parseInt(document.getElementById('produkHarga').value);
-            const antarJemputSelect = document.getElementById('antar_jemput');
-            const selectedOption = antarJemputSelect.options[antarJemputSelect.selectedIndex];
-            const antarJemputHarga = parseInt(selectedOption.getAttribute('data-harga')) || 0;
-
-            document.getElementById('hargaAntarJemput').textContent = antarJemputHarga > 0 ? `Rp${new Intl.NumberFormat('id-ID').format(antarJemputHarga)}` : 'Tidak ada';
-            document.getElementById('totalBayar').textContent = `Rp${new Intl.NumberFormat('id-ID').format(produkHarga + antarJemputHarga)}`;
+            let hargaProduk = parseInt(document.getElementById('produkHarga').value);
+            let hargaTransport = parseInt(document.querySelector('#antar_jemput option:checked').getAttribute('data-harga')) || 0;
+            let jumlahPesanan = parseInt(document.getElementById('jumlahPesanan').value);
+            
+            let totalHarga = (hargaProduk * jumlahPesanan) + hargaTransport;
+            
+            document.getElementById('hargaProduk').innerText = 'Rp' + (hargaProduk * jumlahPesanan).toLocaleString();
+            document.getElementById('hargaTransport').innerText = 'Rp' + hargaTransport.toLocaleString();
+            document.getElementById('totalPembayaran').innerText = 'Rp' + totalHarga.toLocaleString();
         }
+
+        // Quantity adjustment functions
+        function increaseQuantity() {
+            let jumlahPesanan = parseInt(document.getElementById('jumlahPesanan').value);
+            document.getElementById('jumlahPesanan').value = jumlahPesanan + 1;
+            updateTotal();
+        }
+
+        function decreaseQuantity() {
+            let jumlahPesanan = parseInt(document.getElementById('jumlahPesanan').value);
+            if (jumlahPesanan > 1) {
+                document.getElementById('jumlahPesanan').value = jumlahPesanan - 1;
+                updateTotal();
+            }
+        }
+
+        // Initialize total calculation on load
+        updateTotal();
     </script>
     @endsection
 </x-layout3>

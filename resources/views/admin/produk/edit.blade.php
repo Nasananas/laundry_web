@@ -24,15 +24,6 @@
                 </div>
 
                 <div>
-                    <label for="gambar" class="block mb-2 text-sm font-medium text-gray-900">Gambar (Opsional):</label>
-                    <input type="file" name="gambar" id="gambar" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" />
-                    @if($produk->gambar)
-                        <p>Gambar Saat Ini:</p>
-                        <img src="{{ asset('storage/images/' . $produk->gambar) }}" alt="Gambar Produk" style="width: 100px;">
-                    @endif
-                </div>
-
-                <div>
                     <button type="submit" class="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-lg transition duration-300">
                         Simpan Perubahan
                     </button>

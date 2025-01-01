@@ -25,17 +25,9 @@ class ProdukController extends Controller
             'nama' => 'required|string|max:255',
             'harga' => 'required|integer',
             'jenis' => 'required|string|max:255',
-            'gambar' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
         ]);
     
         $data = $request->only(['nama', 'harga','jenis', 'durasi']);
-        
-        // Handle image upload
-        if ($request->hasFile('gambar')) {
-            $fileName = time() . '.' . $request->gambar->extension();
-            $path = $request->file('gambar')->storeAs('public/images', $fileName);
-            $data['gambar'] = basename($path);
-        }
     
         Produk::create($data);
     
@@ -48,22 +40,11 @@ class ProdukController extends Controller
             'nama' => 'required|string|max:255',
             'harga' => 'required|integer',
             'jenis' => 'required|string|max:255',
-            'gambar' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
         ]);
     
         $produk = Produk::findOrFail($id);
         $data = $request->only(['nama', 'harga','jenis', 'durasi']);
-    
-        // Handle image update
-        if ($request->hasFile('gambar')) {
-            if ($produk->gambar && Storage::exists('public/images/' . $produk->gambar)) {
-                Storage::delete('public/images/' . $produk->gambar);
-            }
-    
-            $fileName = time() . '.' . $request->gambar->extension();
-            $path = $request->file('gambar')->storeAs('public/images', $fileName);
-            $data['gambar'] = basename($path);
-        }
+
     
         $produk->update($data);
     
@@ -80,11 +61,6 @@ class ProdukController extends Controller
     public function destroy($id)
     {
         $produk = Produk::findOrFail($id);
-    
-        // Hapus gambar produk dari storage jika ada
-        if ($produk->gambar && Storage::exists('public/images/' . $produk->gambar)) {
-            Storage::delete('public/images/' . $produk->gambar);
-        }
     
         $produk->delete();
     

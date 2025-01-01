@@ -13,28 +13,28 @@
             <ul class="space-y-4">
                 @forelse($produk as $p)
                     <li class="flex items-center justify-between bg-white p-4 rounded-lg shadow-md hover:shadow-lg transition duration-300">
-                        <div class="flex items-center space-x-4">
-                            <!-- Gambar Produk -->
-                            <img src="{{ Storage::url('images/' . $p->gambar) }}" alt="Gambar Produk" class="w-12 h-12 rounded mr-4">
-
-                            <!-- Detail Produk -->
-                            <div>
-                                <p class="font-semibold text-lg text-gray-800">{{ $p->nama }}</p>
-                                <p class="text-gray-700 text-lg">Rp{{ number_format($p->harga, 0, ',', '.') }}</p>
-                                <p class=" text-lg text-gray-500">{{ $p->jenis }}</p>
-                            </div>
+                        <!-- Detail Produk -->
+                        <div>
+                            <p class="font-semibold text-lg text-gray-800">{{ $p->nama }}</p>
+                            <p class="text-gray-700 text-lg">Rp{{ number_format($p->harga, 0, ',', '.') }}</p>
+                            <p class="text-lg text-gray-500">{{ $p->jenis }}</p>
                         </div>
 
                         <!-- Aksi -->
-                        <div class="flex items-center space-x-3">
-                            <a href="{{ route('admin.produk.edit', $p->id) }}" class="bg-green-500 hover:bg-green-600 text-white py-2 px-3 rounded-lg transition duration-300">
+                        <div class="flex items-center space-x-2">
+                            <!-- Tombol Edit -->
+                            <a href="{{ route('admin.produk.edit', $p->id) }}" 
+                               class="inline-block px-4 py-2 text-xs font-medium text-white bg-blue-500 hover:bg-blue-600 rounded-md transition duration-300">
                                 Edit
                             </a>
-
+                            
+                            <!-- Tombol Hapus -->
                             <form action="{{ route('admin.produk.delete', $p->id) }}" method="POST" style="display:inline;">
                                 @csrf
                                 @method('DELETE')
-                                <button type="submit" class="bg-red-500 hover:bg-red-600 text-white py-2 px-3 rounded-lg transition duration-300" onclick="return confirm('Apakah Anda yakin ingin menghapus produk ini?')">
+                                <button type="submit" 
+                                        class="inline-block px-4 py-2 text-xs font-medium text-white bg-red-500 hover:bg-red-600 rounded-md transition duration-300" 
+                                        onclick="return confirm('Apakah Anda yakin ingin menghapus produk ini?')">
                                     Hapus
                                 </button>
                             </form>

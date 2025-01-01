@@ -18,10 +18,17 @@ return new class extends Migration
             $table->foreignId('durasi_id')->nullable()->constrained('durasi')->onDelete('set null');
             $table->foreignId('pewangi_id')->nullable()->constrained('pewangi')->onDelete('set null');
             $table->foreignId('transport_id')->nullable()->constrained('transport')->onDelete('set null');
-            $table->enum('status_pembayaran', ['belumlunas', 'lunas'])->default('belumlunas');
+            $table->enum('status_pembayaran', ['Lunas', 'Hutang'])->nullable();
+            $table->enum('metode_pembayaran', ['CASH', 'Transfer'])->nullable();
+            $table->decimal('dp', 10, 2)->nullable();
             $table->decimal('total_harga', 10, 2);
+            $table->enum('status_pesanan', ['Pending', 'Proses', 'Selesai'])->default('Pending');
+            $table->date('tanggal_jatuh_tempo')->nullable();
+            $table->integer('jumlah_pesanan')->default(1);
+            $table->string('snap_token')->nullable();
             $table->timestamps();
         });
+        
     }
 
     /**

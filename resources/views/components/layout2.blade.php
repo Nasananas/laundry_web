@@ -1,4 +1,3 @@
-<!-- resources/views/admin/components/layout.blade.php -->
 <!DOCTYPE html>
 <html lang="en" class="h-full bg-gray-100">
    <head>
@@ -10,22 +9,25 @@
          /* CSS untuk konten utama */
          .content {
              margin-left: 16rem;
-             padding: 2rem; 
+             padding: 2rem;
+             margin-top: 3rem;
          }
      </style>
+     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
    </head>
    <body class="h-full">
 
       <div class="flex h-screen">
+
          <!-- Sidebar Component -->
          <x-sidebar />
 
-          <!-- Mobile Sidebar (Offcanvas) -->
-          <x-mobile-sidebar />
+         <!-- Mobile Sidebar (Offcanvas) -->
+         <x-mobile-sidebar />
 
          <div class="flex-1 bg-gray-100 p-6">
-            <!-- Header -->
-            <x-header2 />
+            <!-- Navbar -->
+            <x-navbar2 /> <!-- Use the navbar2 component here -->
 
             <!-- Main Content -->
             <div class="bg-white shadow-lg rounded-lg content p-6">
@@ -33,6 +35,7 @@
             </div>
          </div>
       </div>
+
       <script>
          const menuBtn = document.getElementById('menu-btn');
          const mobileMenu = document.getElementById('mobile-menu');
